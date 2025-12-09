@@ -3,12 +3,7 @@
   <header class="sticky top-0 bg-black/80 backdrop-blur-md z-20 border-b border-zinc-800">
     <nav class="container mx-auto flex justify-between items-center p-4">
       <a href="#" class="flex items-center text-white">
-        <!-- Simplified Logo to inherit color -->
-        <svg class="w-auto h-8" viewBox="0 0 200 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="28" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold">
-            <tspan fill="#FFF">nueva</tspan><tspan fill="#FFF" font-weight="900">nave</tspan>
-          </text>
-        </svg>
+        <img src="" alt="Nueva Nave Logo" class="h-10 w-auto">
       </a>
       <div class="hidden md:flex space-x-8">
         <a href="#home" class="text-gray-400 hover:text-white transition duration-300">Inicio</a>
@@ -24,9 +19,9 @@
   <main class="relative z-10">
 
     <!-- Hero / Portada -->
-    <section id="home" class="py-28 sm:py-40 text-center relative overflow-hidden bg-zinc-950">
-       <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900/50 to-zinc-950 z-0"></div>
-       <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="home" class="py-28 sm:py-40 text-center relative overflow-hidden bg-cover bg-center" style="background-image: url('assets/portada.jpg');">
+       <div class="absolute top-0 left-0 w-full h-full bg-black/70 z-0"></div>
+       <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" data-aos="fade-in" data-aos-duration="1200">
         <h1 class="text-4xl sm:text-6xl font-black mb-4 text-white leading-tight">La nueva era para tu vehículo</h1>
         <p class="max-w-2xl mx-auto text-gray-400 text-lg mb-12">Soluciones premium en venta y cuidado automotriz. A domicilio.</p>
         <a href="#featured-car" class="inline-block bg-white text-black font-bold py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105 hover:bg-gray-200">
@@ -38,7 +33,7 @@
     <!-- Featured Car -->
     <section id="featured-car" class="py-20 sm:py-28">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-aos="fade-up">
             <h2 class="text-4xl sm:text-5xl font-black mb-4 text-white">Vehículo del Mes</h2>
             <p class="max-w-2xl mx-auto text-gray-400 text-lg">Una oportunidad única. Este vehículo ha sido inspeccionado y está listo para su nuevo dueño.</p>
         </div>
@@ -46,8 +41,8 @@
         @if (car(); as currentCar) {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <!-- Image Gallery -->
-            <div class="transition-all duration-500 ease-in-out hover:scale-[1.02]">
-              <img [src]="mainCarImage()" alt="Main view of {{currentCar.name}}" class="w-full h-auto object-cover rounded-xl shadow-2xl shadow-black/30 mb-4 aspect-[4/3]">
+            <div data-aos="fade-right" data-aos-delay="100">
+              <img [src]="mainCarImage()" alt="Main view of {{currentCar.name}}" class="w-full h-auto object-cover rounded-xl shadow-2xl shadow-black/30 mb-4 aspect-[4/3] transition-opacity duration-300">
               <div class="grid grid-cols-4 gap-2">
                 @for (image of currentCar.images; track image) {
                   <img [src]="image"
@@ -64,7 +59,7 @@
             </div>
 
             <!-- Car Details -->
-            <div class="flex flex-col bg-zinc-900 p-8 rounded-xl shadow-lg shadow-black/20 border border-zinc-800">
+            <div class="flex flex-col bg-zinc-900 p-8 rounded-xl shadow-lg shadow-black/20 border border-zinc-800" data-aos="fade-left" data-aos-delay="200">
               <h2 class="text-3xl font-bold text-white">{{currentCar.name}}</h2>
               <p class="text-lg text-gray-400 mb-4">{{currentCar.year}} - {{currentCar.version}}</p>
               
@@ -103,16 +98,17 @@
     <!-- Services Section -->
     <section id="services" class="py-20 sm:py-28 bg-zinc-950">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-aos="fade-up">
             <h2 class="text-4xl sm:text-5xl font-black mb-4 text-white">Tratamientos Cerámicos Premium</h2>
             <p class="max-w-2xl mx-auto text-gray-400 text-lg">Protección y brillo duradero para tu vehículo. Realizado a domicilio.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-            @for (service of services(); track service.name) {
+            @for (service of services(); track service.name; let i = $index) {
                 <div class="flex flex-col bg-zinc-900 rounded-xl p-8 border border-zinc-800 transition-all duration-300 ease-in-out shadow-lg shadow-black/20 text-left h-full hover:border-white/20 hover:scale-105"
                      [class.border-white/20]="service.isPremium"
-                     [class.shadow-white/5]="service.isPremium">
+                     [class.shadow-white/5]="service.isPremium"
+                     data-aos="fade-up" [attr.data-aos-delay]="i * 100">
                   
                   <div class="relative h-10">
                   @if (service.isPremium) {
@@ -151,7 +147,7 @@
     <section id="sell-car" class="py-20 sm:py-28">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div data-aos="fade-right">
             <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-white">¿Quieres vender tu auto?</h2>
             <p class="text-gray-400 text-lg mb-6">Nosotros nos encargamos. Recibe el mejor precio por tu vehículo sin el estrés de la venta. Completa el formulario y te contactaremos para iniciar el proceso.</p>
             <div class="space-y-4">
@@ -184,7 +180,7 @@
                </div>
             </div>
           </div>
-          <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800">
+          <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800" data-aos="fade-left" data-aos-delay="100">
             <h3 class="text-2xl font-bold mb-6 text-center text-white">Inicia tu Venta Ahora</h3>
             <form [formGroup]="sellCarForm" (ngSubmit)="onSubmitSellForm()" class="space-y-4">
               <div>
@@ -211,7 +207,7 @@
     <!-- About Us -->
     <section id="nosotros" class="py-20 sm:py-28 bg-zinc-950">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center">
+            <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-white">Sobre Nueva Nave</h2>
                 <p class="text-gray-400 text-lg">
                     En Nueva Nave, nos especializamos en la venta por consignación de vehículos de gama media y alta, utilizando un modelo moderno y eficiente que opera completamente en línea. Ayudamos a los propietarios a encontrar el comprador ideal para su auto, gestionando todo el proceso para una experiencia sin complicaciones. Nuestra misión es conectar apasionados por los autos con el vehículo de sus sueños, de forma segura y transparente.

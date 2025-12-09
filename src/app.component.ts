@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, AfterViewInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+
+declare var AOS: any; // Declare AOS to be available globally
 
 interface Service {
   name: string;
@@ -29,7 +31,7 @@ interface FeaturedCar {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   
   currentYear = new Date().getFullYear();
   whatsAppPhoneNumber = '51966401791'; // Peru country code
@@ -109,14 +111,22 @@ export class AppComponent {
     ],
     description: 'Un sedán premium equilibrado, elegante y confiable. Excelente manejo, consumo eficiente y estética deportiva con detalles M. Unidad muy cuidada, lista para disfrutar.',
     images: [
-      'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1920&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1920&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1553440569-2493fd4d262d?q=80&w=1920&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1610433583592-1a1cf113f837?q=80&w=1920&auto=format&fit=crop'
+      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.01.jpeg',
+      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.02.jpeg',
+      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.03.jpeg',
+      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.04.jpeg'
     ]
   });
 
   mainCarImage = signal<string>(this.car().images[0]);
+
+  ngAfterViewInit(): void {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50,
+    });
+  }
 
   changeMainCarImage(newImage: string): void {
     this.mainCarImage.set(newImage);
