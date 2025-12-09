@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
 interface Service {
   name: string;
@@ -25,11 +26,23 @@ interface FeaturedCar {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ReactiveFormsModule]
 })
 export class AppComponent {
   
   currentYear = new Date().getFullYear();
+  whatsAppPhoneNumber = '51966401791'; // Peru country code
+
+  instagramUrl = 'https://www.instagram.com/nuevanave?igsh=MXgydW5rMmJmaXgwaw==';
+  tiktokUrl = 'https://www.tiktok.com/@nueva.nave?_t=ZM-8tBqXMoq8es&_r=1';
+  email = 'NUEVANAVEPERU@GMAIL.COM';
+
+  sellCarForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    carInfo: new FormControl('', Validators.required),
+  });
 
   services = signal<Service[]>([
     {
@@ -96,10 +109,10 @@ export class AppComponent {
     ],
     description: 'Un sedán premium equilibrado, elegante y confiable. Excelente manejo, consumo eficiente y estética deportiva con detalles M. Unidad muy cuidada, lista para disfrutar.',
     images: [
-      'https://picsum.photos/id/119/800/600',
-      'https://picsum.photos/id/175/800/600',
-      'https://picsum.photos/id/211/800/600',
-      'https://picsum.photos/id/305/800/600'
+      'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1920&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1920&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1553440569-2493fd4d262d?q=80&w=1920&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1610433583592-1a1cf113f837?q=80&w=1920&auto=format&fit=crop'
     ]
   });
 
@@ -107,5 +120,27 @@ export class AppComponent {
 
   changeMainCarImage(newImage: string): void {
     this.mainCarImage.set(newImage);
+  }
+
+  getCarWhatsAppUrl(): string {
+    const carName = this.car().name;
+    const message = `Hola, estoy interesado en el ${carName}.`;
+    return `https://wa.me/${this.whatsAppPhoneNumber}?text=${encodeURIComponent(message)}`;
+  }
+  
+  getServiceWhatsAppUrl(serviceName: string): string {
+    const message = `Hola, quisiera agendar el servicio de tratamiento cerámico "${serviceName}".`;
+    return `https://wa.me/${this.whatsAppPhoneNumber}?text=${encodeURIComponent(message)}`;
+  }
+
+  onSubmitSellForm(): void {
+    if (this.sellCarForm.invalid) {
+      this.sellCarForm.markAllAsTouched();
+      return;
+    }
+    const formValue = this.sellCarForm.value;
+    const message = `Hola, quiero vender mi auto.\n\n*Nombre:* ${formValue.name}\n*Teléfono:* ${formValue.phone}\n*Auto:* ${formValue.carInfo}`;
+    const url = `https://wa.me/${this.whatsAppPhoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   }
 }

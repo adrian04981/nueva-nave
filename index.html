@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <title>Nueva Nave</title>
@@ -14,6 +13,10 @@
     body {
       font-family: 'Inter', sans-serif;
     }
+    ::selection {
+      background-color: #3b82f6;
+      color: #fff;
+    }
   </style>
 <script type="importmap">
 {
@@ -26,12 +29,13 @@
     "rxjs/fetch": "https://aistudiocdn.com/rxjs@^7.8.2/fetch?conditions=es2015",
     "@angular/compiler": "https://next.esm.sh/@angular/compiler@^21.0.3?external=rxjs",
     "@angular/platform-browser": "https://next.esm.sh/@angular/platform-browser@^21.0.3?external=rxjs",
-    "@angular/core": "https://next.esm.sh/@angular/core@^21.0.3?external=rxjs"
+    "@angular/core": "https://next.esm.sh/@angular/core@^21.0.3?external=rxjs",
+    "@angular/forms": "https://next.esm.sh/@angular/forms@^21.0.3?external=rxjs"
   }
 }
 </script>
 </head>
-<body class="bg-slate-900 text-slate-200">
+<body class="bg-slate-900 text-slate-300">
   <app-root></app-root>
 </body>
 </html>
