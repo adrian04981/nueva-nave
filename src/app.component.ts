@@ -111,10 +111,10 @@ export class AppComponent implements AfterViewInit {
     ],
     description: 'Un sedán premium equilibrado, elegante y confiable. Excelente manejo, consumo eficiente y estética deportiva con detalles M. Unidad muy cuidada, lista para disfrutar.',
     images: [
-      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.01.jpeg',
-      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.02.jpeg',
-      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.03.jpeg',
-      'assets/Imagen de WhatsApp 2025-11-30 a las 10.00.04.jpeg'
+      'assets/Imagen de WhatsApp 2025-11-30 a las 18.47.09_339853e9.jpg',
+      'assets/Imagen de WhatsApp 2025-11-30 a las 18.47.10_88e7cc09.jpg',
+      'assets/Imagen de WhatsApp 2025-11-30 a las 18.47.10_452d569d.jpg',
+      'assets/Imagen de WhatsApp 2025-11-30 a las 18.47.10_ac3fd7da.jpg'
     ]
   });
 
